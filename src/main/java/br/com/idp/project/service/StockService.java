@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import br.com.idp.project.controller.dto.StockDTO;
 import br.com.idp.project.model.Stock;
@@ -36,27 +35,29 @@ public class StockService {
 	
 	public List<StockDTO> listStocksByStockId(String stockId){
 		
-		List<Stock> stocks = stockRepository.findByStockId(stockId);
+		List<Stock> stockList = stockRepository.findByStockId(stockId);
 					
-		return StockDTO.converter(stocks);
+		return StockDTO.converter(stockList);
 		
 	}
 	
 	public List<StockDTO> listAllStockAndQuote(){
 		
-		List<Stock> stocks = stockRepository.findAll();
+		List<Stock> stockList = stockRepository.findAll();
 		
-		return StockDTO.converter(stocks);
+		return StockDTO.converter(stockList);
 		
 	}
 	
-	public List<Stock> removeAll(@PathVariable String stockId){
-	List <Stock> stock = stockRepository.findByStockId(stockId);
-		if(!stock.isEmpty()) {
+	public List<Stock> removeAll(String stockId){
+	List <Stock> stockList = stockRepository.findByStockId(stockId);
+		/*if(!stockList.isEmpty()) {
 			stockRepository.deleteByStockId(stockId);
-		}
+		}*/
+	
+		stockRepository.deleteByStockId(stockId);
 		
-		return stock;
+		return stockList;
 	}
 	
 	

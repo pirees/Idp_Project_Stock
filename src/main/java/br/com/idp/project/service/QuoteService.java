@@ -30,9 +30,9 @@ public class QuoteService {
 	
 	public List<Quote> listQuotes(){
 		
-		List<Quote> quotes = quotesRepository.findAll();
+		List<Quote> quoteList = quotesRepository.findAll();
 								
-		return quotes;
+		return quoteList;
 		
 	}
 	

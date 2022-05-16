@@ -33,7 +33,7 @@ public class QuoteController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(quote);
 		}
 		
-		 quote = quotesService.save(quote);
+		 quotesService.save(quote);
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(quote);
 		
@@ -42,13 +42,13 @@ public class QuoteController {
 	@GetMapping(value = "quote")
 	public ResponseEntity<List<Quote>> findQuote (){
 		
-		List<Quote> quotes = quotesService.listQuotes();
+		List<Quote> quoteList = quotesService.listQuotes();
 		
-		if(quotes != null) {
-			return ResponseEntity.status(HttpStatus.OK).body(quotes);
+		if(quoteList.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(quoteList);
 		}
-		
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(quotes);
+			
+		return ResponseEntity.status(HttpStatus.OK).body(quoteList);
 		
 	}
 	
