@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.idp.project.controller.dto.ReadStockDTO;
 import br.com.idp.project.controller.dto.StockDTO;
 import br.com.idp.project.model.Stock;
 import br.com.idp.project.repository.StockRepository;
@@ -26,11 +27,16 @@ public class StockService {
 		this.stockRepository = stockRepository;
 	}
 
-	public Stock save(Stock stock) {
+	public ReadStockDTO save(Stock stock) {
 
+		ReadStockDTO dto = new ReadStockDTO();
+		
+		dto.setId(stock.getStockId());
+		dto.setDescription(stock.getDescription());
+		
 		stockRepository.save(stock);
 		
-		return WebClientApi.insertStockIntoAPI(stock, urlStockManager);
+		return WebClientApi.insertStockIntoAPI(dto, urlStockManager);
 	}
 	
 	public List<StockDTO> listStocksByStockId(String stockId){
